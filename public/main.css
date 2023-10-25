@@ -1,0 +1,49 @@
+:root {
+    --bs-body-bg: #151718;
+    --bs-border-color: #3a3f42;
+}
+
+#logo {
+    height: 48px;
+    margin-right: 16px;
+}
+
+.hljs {
+    background-color: #0e1010 !important;
+    border-radius: 6px;
+}
+
+blockquote {
+    border-radius: 6px;
+    border-color: #c35151 !important;
+    background: #00000044;
+    color: #ffffff99 !important;
+    padding: 12px;
+}
+
+blockquote > p {
+    margin: 0 !important;
+}
+
+#toc li {
+    padding-left: 0 !important;
+}
+
+#toc a {
+    display: block;
+    padding: 8px;
+    border-radius: 6px;
+
+    transition: 0.3s;
+}
+
+#toc a:hover {
+    text-decoration: inherit;
+    background-color: #3a3f42;
+}
+
+#toc li.active a {
+    background-color: #cf3c3c !important;
+    color: white !important;
+    font-weight: 600;
+}

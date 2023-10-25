@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Getting started | MonoGame.Reload </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Getting started | MonoGame.Reload ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/akaadream/MonoGame.Reload/blob/main/docfx_project\api\index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+  </head>
+
+  <script type="module" src="./../public/docfx.min.js"></script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/Icon.png" alt="MonoGame.Reload">
+            MonoGame.Reload
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h2 id="getting-started">Getting started</h2>
+
+<p>On your Game class add an instance of <code>FileWatcher</code>:</p>
+<pre><code class="lang-csharp">private FileWatcher _watcher;
+</code></pre>
+<p>Then, <strong>instanciate</strong> it inside your <code>Initialize</code> function:</p>
+<pre><code class="lang-csharp">protected override void Initialize()
+{
+    _watcher = new(Content);
+
+    base.Initialize();
+}
+</code></pre>
+<blockquote>
+<p><em>Note</em>: The watcher is instanciated with the ContentManager because it will be used to create all the assets collections.</p>
+</blockquote>
+<p>Now, you'll need to initialize the <code>AssetReloader</code>, the class used to hot-reload your content files:</p>
+<pre><code class="lang-csharp">protected override void Initialize()
+{
+    _watcher = new(Content);
+
+    AssetReloader.Initialize(
+        _watcher.ProjectRootPath,
+        Microsoft.Xna.Framework.Content.Pipeline.TargetPlatform.DesktopGL,
+        GraphicsDevice
+        );
+}
+</code></pre>
+<p>Finally, you have to load the current Content files inside your <code>LoadContent</code> function:</p>
+<pre><code class="lang-csharp">protected override void LoadContent()
+{
+    _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    _watcher.LoadFiles();
+}
+</code></pre>
+<p>Congratulations!<br>
+The Hot-Reloader is now setup and you can easily access to an asset which will be automatically reloaded when you will update its source file:</p>
+<pre><code class="lang-csharp">// Access to a Texture2D
+AssetsManager.Textures[&quot;Sprites/name_of_my_texture&quot;];
+</code></pre>
+<blockquote>
+<p><em>Note</em>: You have to respect the hierarchy of your files.<br>
+In the example above, the file &quot;name_of_my_texture&quot; is contained inside the folder Sprites inside the Content directory.</p>
+</blockquote>
+<blockquote>
+<p><em>2nd Note</em>: If the key of the texture does not exists, an exception will be thrown, so you may want to check if the texture name exists by using <code>Textures2D.ContainsKey(string key)</code>.</p>
+</blockquote>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Made by Guillaume Lortet with ♥
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
