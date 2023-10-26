@@ -4,6 +4,16 @@
   "files": [
     {
       "type": "Conceptual",
+      "source_relative_path": "api/events.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/events.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
@@ -18,6 +28,16 @@
       "output": {
         ".html": {
           "relative_path": "api/installation.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/new.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/new.html"
         }
       },
       "version": ""
